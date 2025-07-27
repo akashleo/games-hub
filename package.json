@@ -1,0 +1,22 @@
+{
+  "name": "microfrontend-games-hub",
+  "version": "1.0.0",
+  "description": "A microfrontend architecture hosting multiple game applications",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run --recursive build",
+    "start:host": "cd apps/host-dashboard && pnpm dev",
+    "start:tictactoe": "cd apps/tictactoe-svelte && pnpm dev",
+    "start:checker": "cd apps/checker-vue && pnpm dev",
+    "start:hangman": "cd apps/hangman-react && pnpm dev",
+    "install:all": "pnpm install --recursive"
+  },
+  "devDependencies": {
+    "pnpm": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
