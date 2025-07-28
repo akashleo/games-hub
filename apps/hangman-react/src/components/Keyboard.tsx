@@ -2,8 +2,8 @@ import React from 'react';
 
 interface KeyboardProps {
   guessedLetters: string[];
-  word: string;
-  onLetterGuess: (letter: string) => void;
+  selectedWord: string;
+  onLetterClick: (letter: string) => void;
   disabled?: boolean;
 }
 
@@ -11,13 +11,13 @@ const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export const Keyboard: React.FC<KeyboardProps> = ({
   guessedLetters,
-  word,
-  onLetterGuess,
+  selectedWord,
+  onLetterClick,
   disabled = false
 }) => {
   const getButtonStyle = (letter: string) => {
     if (guessedLetters.includes(letter)) {
-      const isCorrect = word.includes(letter);
+      const isCorrect = selectedWord.includes(letter);
       return isCorrect
         ? 'bg-green-500 text-white border-green-600 cursor-not-allowed'
         : 'bg-red-500 text-white border-red-600 cursor-not-allowed';
@@ -38,7 +38,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
           return (
             <button
               key={letter}
-              onClick={() => !isDisabled && onLetterGuess(letter)}
+              onClick={() => !isDisabled && onLetterClick(letter)}
               disabled={isDisabled}
               className={`
                 w-10 h-10 sm:w-12 sm:h-12 rounded-lg border-2 font-bold text-sm sm:text-base

@@ -2,17 +2,17 @@ import React from 'react';
 import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 
 interface GameStatusProps {
-  gameState: 'playing' | 'won' | 'lost';
-  word: string;
+  gameStatus: 'playing' | 'won' | 'lost';
+  selectedWord: string;
   onReset: () => void;
 }
 
-export const GameStatus: React.FC<GameStatusProps> = ({ gameState, word, onReset }) => {
-  if (gameState === 'playing') {
+export const GameStatus: React.FC<GameStatusProps> = ({ gameStatus, selectedWord, onReset }) => {
+  if (gameStatus === 'playing') {
     return null;
   }
 
-  const isWon = gameState === 'won';
+  const isWon = gameStatus === 'won';
   
   return (
     <div className={`
@@ -44,18 +44,18 @@ export const GameStatus: React.FC<GameStatusProps> = ({ gameState, word, onReset
         </p>
         
         <p className="text-2xl font-bold text-blue-600 mb-6">
-          The word was: <span className="text-blue-800">{word}</span>
+          The word was: <span className="text-blue-800">{selectedWord}</span>
         </p>
         
         <button
           onClick={onReset}
           className={`
-            bg-gradient-to-r from-blue-500 to-purple-600 text-white
-            px-8 py-3 rounded-lg font-semibold text-lg
-            hover:from-blue-600 hover:to-purple-700
-            transform hover:scale-105 transition-all duration-200
-            focus:outline-none focus:ring-4 focus:ring-blue-300
-            flex items-center gap-2 mx-auto
+            inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold
+            transition-all duration-200 hover:scale-105 active:scale-95
+            ${isWon 
+              ? 'bg-green-500 hover:bg-green-600 text-white' 
+              : 'bg-red-500 hover:bg-red-600 text-white'
+            }
           `}
         >
           <RotateCcw className="w-5 h-5" />

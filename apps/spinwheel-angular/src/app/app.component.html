@@ -1,0 +1,77 @@
+<div class="game-container" *ngIf="state$ | async as state">
+  <div class="header">
+    <h1>🎡 Emoji Spinning Wheel</h1>
+    <div class="session-info">
+      <span class="spins-counter">Spins: {{ state.spinsUsed }}/{{ state.maxSpins }}</span>
+      <button 
+        *ngIf="state.spinsUsed >= state.maxSpins" 
+        class="new-session-btn" 
+        (click)="startNewSession()">
+        New Session
+      </button>
+    </div>
+  </div>
+
+  <div class="winning-combination" *ngIf="state.winningCombination.length > 0">
+    <h4>Winning Combination:</h4>
+    <div class="combo-grid">
+      <div class="combo-item" *ngFor="let item of state.winningCombination">
+        <span class="combo-emoji">{{ item.emoji }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wheel-container">
+    <div class="wheel-wrapper">
+      <div 
+        class="spinning-wheel" 
+        [style.transform]="'rotate(' + state.currentRotation + 'deg)'"
+        [class.spinning]="state.isSpinning">
+        <div class="wheel-segment" 
+             *ngFor="let item of state.wheelItems; let i = index"
+             [style.transform]="'rotate(' + (i * (360 / state.wheelItems.length)) + 'deg)'">
+          <span class="emoji">{{ item.emoji }}</span>
+        </div>
+      </div>
+      <div class="wheel-pointer"></div>
+    </div>
+
+    <button 
+      class="spin-button" 
+      (click)="spin()" 
+      [disabled]="state.isSpinning || state.gameStatus !== 'playing'"
+      [class.disabled]="state.isSpinning || state.gameStatus !== 'playing'">
+      {{ getButtonText(state) }}
+    </button>
+  </div>
+
+  <div class="results-section">
+    <div class="current-result" *ngIf="state.lastResult">
+      <h3>Last Spin Result:</h3>
+      <div class="result-display">
+        <span class="result-emoji">{{ state.lastResult.emoji }}</span>
+        <span class="result-name">{{ state.lastResult.name }}</span>
+      </div>
+    </div>
+
+    <div class="results-history" *ngIf="state.results.length > 0">
+      <h4>This Session's Results:</h4>
+      <div class="history-grid">
+        <div class="history-item" *ngFor="let result of state.results; let i = index">
+          <span class="spin-number">{{ i + 1 }}</span>
+          <span class="history-emoji">{{ result.emoji }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over Overlay -->
+  <div class="game-over-overlay" *ngIf="state.gameStatus !== 'playing'">
+    <div class="game-over-modal">
+      <h2 *ngIf="state.gameStatus === 'won'">🎉 You Won! 🎉</h2>
+      <h2 *ngIf="state.gameStatus === 'lost'">😢 You Lost 😢</h2>
+      <p>You matched the combination!</p>
+      <button class="play-again-btn" (click)="startNewSession()">Play Again</button>
+    </div>
+  </div>
+</div>
