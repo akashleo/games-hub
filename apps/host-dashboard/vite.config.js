@@ -8,9 +8,10 @@ export default defineConfig({
     federation({
       name: 'host-dashboard',
       remotes: {
-        tictactoeApp: 'http://localhost:3001/assets/remoteEntry.js',
-        checkerApp: 'http://localhost:3002/assets/remoteEntry.js',
-        hangmanApp: 'http://localhost:3003/assets/remoteEntry.js',
+        tictactoeApp: 'http://172.18.160.1:3001/remoteEntry.js',
+        checkerApp: 'http://172.18.160.1:3002/remoteEntry.js',
+        hangmanApp: 'http://172.18.160.1:3003/remoteEntry.js',
+        spinwheelApp: 'http://172.18.160.1:3004/remoteEntry.js',
       },
       shared: ['react', 'react-dom']
     })

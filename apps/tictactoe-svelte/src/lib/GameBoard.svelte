@@ -1,17 +1,16 @@
 <script lang="ts">
-  import { board, makeMove, gameStatus, getWinningLine } from '../stores/gameStore';
+  import { game } from './game.svelte';
   import GameCell from './GameCell.svelte';
 
-  $: winningLine = $gameStatus === 'won' ? getWinningLine($board) : null;
+  const winningLine = $derived(game.getWinningLine());
 </script>
 
 <div class="game-board">
-  {#each $board as cell, index}
+  {#each game.board as cell, index}
     <GameCell 
       value={cell} 
       {index} 
-      isWinning={winningLine?.includes(index) || false}
-      onClick={makeMove}
+      isWinning={winningLine?.includes(index) ?? false}
     />
   {/each}
 </div>

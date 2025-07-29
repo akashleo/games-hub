@@ -17,7 +17,10 @@
     "@angular/router": "^20.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+    "@analogjs/vite-plugin-angular": "^1.0.0",
+    "@originjs/vite-plugin-federation": "^1.2.4",
+    "vite-plugin-node-polyfills": "^0.24.0"
   },
   "devDependencies": {
     "@angular/build": "^20.0.0",

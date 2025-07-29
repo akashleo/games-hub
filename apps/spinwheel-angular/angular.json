@@ -40,10 +40,12 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "development": {
-              "buildTarget": "demo:build:development"
+              "buildTarget": "demo:build:development",
+              "port": 3004
             },
             "production": {
-              "buildTarget": "demo:build:production"
+              "buildTarget": "demo:build:production",
+              "port": 3004
             }
           },
           "defaultConfiguration": "development"

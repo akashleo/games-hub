@@ -6,6 +6,8 @@ import './App.css'
 const TicTacToeApp = React.lazy(() => import('tictactoeApp/App'))
 const CheckerApp = React.lazy(() => import('checkerApp/App'))
 const HangmanApp = React.lazy(() => import('hangmanApp/App'))
+const SpinwheelApp = React.lazy(() => import('spinwheelApp/App')) // Angular microfrontend
+
 
 function App() {
   const [currentGame, setCurrentGame] = useState(null)
@@ -31,6 +33,13 @@ function App() {
       description: 'Word guessing game built with React',
       component: HangmanApp,
       color: '#45b7d1'
+    },
+    {
+      id: 'spinwheel',
+      name: 'Spinwheel',
+      description: 'Emoji spinning wheel game built with Angular',
+      component: SpinwheelApp,
+      color: '#f9ca24'
     }
   ]
 
@@ -43,7 +52,7 @@ function App() {
         ← Back to Dashboard
       </button>
       <Suspense fallback={<div className="loading">Loading game...</div>}>
-        <GameComponent />
+        <GameComponent />{console.log(GameComponent, 'GameComponent')}
       </Suspense>
     </div>
   )
@@ -61,7 +70,7 @@ function App() {
       </header>
 
       <main className="main">
-        <div className="games-grid">
+        <div className="games-grid center-align">
           {games.map((game) => (
             <div 
               key={game.id} 
@@ -101,6 +110,7 @@ function App() {
                 <li>Tic Tac Toe: Svelte</li>
                 <li>Checker: Vue.js</li>
                 <li>Hangman: React</li>
+                <li>Spinwheel: Angular</li>
               </ul>
             </div>
           </div>

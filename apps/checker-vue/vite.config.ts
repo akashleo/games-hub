@@ -17,7 +17,8 @@ export default defineConfig({
       exposes: {
         './App': './src/App.vue'
       },
-      shared: ['vue']
+      shared: ['vue'],
+      dev: true
     })
   ],
   build: {
@@ -28,6 +29,15 @@ export default defineConfig({
   },
   server: {
     port: 3002,
-    host: true
+    host: '0.0.0.0',
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST', 'OPTIONS'],
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
+    },
   }
 })

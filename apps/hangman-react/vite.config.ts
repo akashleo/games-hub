@@ -12,7 +12,8 @@ export default defineConfig({
       exposes: {
         './App': './src/App.tsx'
       },
-      shared: ['react', 'react-dom']
+      shared: ['react', 'react-dom'],
+      dev: true
     })
   ],
   build: {
@@ -23,7 +24,16 @@ export default defineConfig({
   },
   server: {
     port: 3003,
-    host: true
+    host: '0.0.0.0',
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST', 'OPTIONS'],
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
+    },
   },
   optimizeDeps: {
     exclude: ['lucide-react'],

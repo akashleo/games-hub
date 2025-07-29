@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { gameMessage, gameStatus, resetGame } from '../stores/gameStore';
+  import { game } from './game.svelte';
 </script>
 
 <div class="game-status">
-  <h2 class="status-message" class:game-over={$gameStatus !== 'playing'}>
-    {$gameMessage}
+  <h2 class="status-message" class:game-over={game.status !== 'playing'}>
+    {game.gameMessage}
   </h2>
   
-  <button class="reset-button" on:click={resetGame}>
-    {$gameStatus === 'playing' ? 'Reset Game' : 'Play Again'}
+  <button class="reset-button" on:click={game.resetGame}>
+    {game.status === 'playing' ? 'Reset Game' : 'Play Again'}
   </button>
 </div>
 

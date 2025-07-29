@@ -17,7 +17,8 @@ export default defineConfig({
       exposes: {
         './App': './src/App.svelte'
       },
-      shared: ['svelte']
+      shared: ['svelte'],
+      dev: true
     })
   ],
   build: {
@@ -28,6 +29,9 @@ export default defineConfig({
   },
   server: {
     port: 3001,
-    host: true
+    host: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   }
 })
